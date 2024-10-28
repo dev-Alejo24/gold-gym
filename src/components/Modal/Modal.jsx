@@ -4,32 +4,39 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Button from 'react-bootstrap/Button';
 import FormBs from 'react-bootstrap/Form';  
+import './modal.css'
 
 function Modal(props) {
 
     const initialCredentials = {
+        code: props.item.code || '',
         name: props.item.name || '',
         description: props.item.description || '',
-        image: props.item.image || '',
+        supplier: props.item.supplier || '',
         stock: props.item.stock || '',
-        price: props.item.price || ''
+        priceCost: props.item.priceCost || '',
+        priceSale: props.item.priceSale || '',
+        unitPack: props.item.unitPack || ''
       }
     
       const formSchema = Yup.object().shape({
+        code: Yup.string().required(),
+    
         name: Yup.string()
           .required()
           .min(4, 'Nombre demasiado corto')
-          .max(45, 'Nombre demasiado largo'),
+          .max(55, 'Nombre demasiado largo'),
     
         description: Yup.string()
           .required()
           .min(10, 'Nombre demasiado corto')
-          .max(250, 'Nombre demasiado largo'),
+          .max(255, 'Nombre demasiado largo'),
     
-        image: Yup.string(),
-    
+        supplier: Yup.string().required(),
         stock: Yup.number().required(),
-        price: Yup.number().required()
+        priceUnit: Yup.number().required(),
+        priceSale: Yup.number().required(),
+        unitPack: Yup.number().required(),
       })
 
   return (
@@ -40,12 +47,12 @@ function Modal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <ModalBs.Header closeButton className='bg-dark'>
+      <ModalBs.Header closeButton  className='modal-header'>
         <ModalBs.Title id="contained-modal-title-vcenter" >
-          Modal heading
+          Editor de Producto
         </ModalBs.Title>
       </ModalBs.Header>
-      <ModalBs.Body className='bg-dark'>
+      <ModalBs.Body className='modal-body'>
 
       <Formik
         initialValues={ initialCredentials }
@@ -61,9 +68,19 @@ function Modal(props) {
         {
           ({ values, isSubmitting, errors, touched, handleChange }) => (
             <Form>
+                 <FormBs.Group className='mb-3'>
+                <label htmlFor='code'> Codigo de Producto </label>
+                <Field id='name' type='text' placeholder='Codigo' name='code' className='form-control field-input' onChange={handleChange} />
+                {
+                  errors.code && touched.code && (
+                    <ErrorMessage name='code' component='div' />
+                  )
+                }
+              </FormBs.Group>
+
               <FormBs.Group className='mb-3'>
                 <label htmlFor='name'> Nombre del Producto </label>
-                <Field id='name' type='text' placeholder='Buzo' name='name' className='form-control field-input' onChange={handleChange} />
+                <Field id='name' type='text' placeholder='Nombre' name='name' className='form-control field-input' onChange={handleChange} />
                 {
                   errors.name && touched.name && (
                     <ErrorMessage name='name' component='div' />
@@ -81,12 +98,12 @@ function Modal(props) {
                 }
               </FormBs.Group>
 
-              <FormBs.Group>
-                <label htmlFor='image'> Imagen </label>
-                <Field id='image' type='text' placeholder='imagen' name='image' className='form-control field-input' onChange={handleChange} />
+              <FormBs.Group className='mb-3'>
+                <label htmlFor='supplier'> Proveedor </label>
+                <Field id='supplier' type='text' placeholder='Provedor' name='supplier' className='form-control field-input' onChange={handleChange} />
                 {
-                  errors.image && touched.image && (
-                    <ErrorMessage name='image' component='div' />
+                  errors.supplier && touched.supplier && (
+                    <ErrorMessage name='supplier' component='div' />
                   )
                 }
               </FormBs.Group>
@@ -102,18 +119,39 @@ function Modal(props) {
               </FormBs.Group>
 
               <FormBs.Group className='mb-3'>
-                <label htmlFor='price'> price </label>
-                <Field id='price' type='number' placeholder='150000' name='price' className='form-control field-input' onChange={handleChange} />
+                <label htmlFor='priceCost'> Precio Costo </label>
+                <Field id='priceCost' type='number' placeholder='Precio de Costo' name='priceCost' className='form-control field-input' onChange={handleChange} />
                 {
-                  errors.price && touched.price && (
-                    <ErrorMessage name='price' component='div' />
+                  errors.priceCost && touched.priceCost && (
+                    <ErrorMessage name='priceCost' component='div' />
                   )
                 }
               </FormBs.Group>
 
+              <FormBs.Group className='mb-3'>
+                <label htmlFor='priceSale'> Precio de Venta </label>
+                <Field id='priceSale' type='number' placeholder='Precio de venta' name='priceSale' className='form-control field-input' onChange={handleChange} />
+                {
+                  errors.priceSale && touched.priceSale && (
+                    <ErrorMessage name='priceSale' component='div' />
+                  )
+                }
+              </FormBs.Group>
+
+              <FormBs.Group className='mb-3'>
+                <label htmlFor='unitPack'> UnidadxCaja </label>
+                <Field id='unitPack' type='number' placeholder='Unidad x Caja' name='unitPack' className='form-control field-input' onChange={handleChange} />
+                {
+                  errors.unitPack && touched.unitPack && (
+                    <ErrorMessage name='unitPack' component='div' />
+                  )
+                }
+              </FormBs.Group>
+              
+
               <Button type='submit' className='btn-btn-primary'>Cargar producto</Button>
               {
-                isSubmitting ? (<p>Enviando nuevo producto</p>) : null
+                isSubmitting ? (<p>Producto enviado</p>) : null
               }
             </Form>
           )
@@ -123,8 +161,8 @@ function Modal(props) {
       </Formik>
         
       </ModalBs.Body>
-      <ModalBs.Footer className='bg-dark' >
-        <Button onClick={props.onHide}>Close</Button>
+      <ModalBs.Footer className='modal-footer' >
+        <Button onClick={props.onHide}>Cerrar</Button>
       </ModalBs.Footer>
     </ModalBs> 
     </div>

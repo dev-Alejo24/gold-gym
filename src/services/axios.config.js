@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const URL = 'https://670004004da5bd237552e6d9.mockapi.io/api/stockProduct';
+// tener en cuenta la API segun el proyecto
+const URL = 'https://67036a39bd7c8c1ccd41546b.mockapi.io/api/stockRivera';
 
 export const axiosInstance = axios.create({
     baseURL: URL

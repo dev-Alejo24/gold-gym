@@ -15,9 +15,9 @@ function Navbar() {
             <Nav.Item>
                 <Link to='/' style={{color:'#fff', textDecoration: 'none'}}> Home </Link>
             </Nav.Item>
-            {/*<Nav.Item>
+            <Nav.Item>
                 <Link to='/venta' style={{color:'#fff', textDecoration: 'none'}}> Vender</Link>
-            </Nav.Item>*/}
+            </Nav.Item>
             <Nav.Item>
                 <Link to='/create' style={{color:'#fff', textDecoration: 'none'}}> Agregar </Link>
             </Nav.Item>

@@ -9,28 +9,34 @@ import { axiosInstance } from '../../services/axios.config';
 function FormCreateProduct() {
 
   const initialValues = {
+    code: '',
     name: '',
     description: '',
-    image: '',
+    supplier: '',
     stock: '',
-    price: ''
+    priceCost: '',
+    priceSale: '',
+    unitPack: '',
   }
 
   const validationSchema = Yup.object().shape({
+    code: Yup.string().required(),
+    
     name: Yup.string()
       .required()
       .min(4, 'Nombre demasiado corto')
-      .max(45, 'Nombre demasiado largo'),
+      .max(55, 'Nombre demasiado largo'),
 
     description: Yup.string()
       .required()
       .min(10, 'Nombre demasiado corto')
-      .max(250, 'Nombre demasiado largo'),
+      .max(255, 'Nombre demasiado largo'),
 
-    image: Yup.string(),
-
+    supplier: Yup.string().required(),
     stock: Yup.number().required(),
-    price: Yup.number().required()
+    priceCost: Yup.number().required(),
+    priceSale: Yup.number().required(),
+    unitPack: Yup.number().required(),
   })
 
 
@@ -58,6 +64,16 @@ function FormCreateProduct() {
         {
           ({ values, isSubmitting, errors, touched }) => (
             <Form>
+               <FormBs.Group className='mb-3'>
+                <label htmlFor='code'> Codigo del Producto </label>
+                <Field id='code' type='text' placeholder='Codigo' name='code' className='form-control field-input'  />
+                {
+                  errors.code && touched.code && (
+                    <ErrorMessage name='code' component='div' />
+                  )
+                }
+              </FormBs.Group>
+
               <FormBs.Group className='mb-3'>
                 <label htmlFor='name'> Nombre del Producto </label>
                 <Field id='name' type='text' placeholder='Articulo' name='name' className='form-control field-input'  />
@@ -78,12 +94,12 @@ function FormCreateProduct() {
                 }
               </FormBs.Group>
 
-              <FormBs.Group>
-                <label htmlFor='image'> Imagen </label>
-                <Field id='image' type='text' placeholder='imagen' name='image' className='form-control field-input'/>
+              <FormBs.Group className='mb-3'>
+                <label htmlFor='supplier'> Proveedor </label>
+                <Field id='supplier' type='text' placeholder='Proveedor' name='supplier' className='form-control field-input'  />
                 {
-                  errors.image && touched.image && (
-                    <ErrorMessage name='image' component='div' />
+                  errors.supplier && touched.supplier && (
+                    <ErrorMessage name='supplier' component='div' />
                   )
                 }
               </FormBs.Group>
@@ -99,16 +115,36 @@ function FormCreateProduct() {
               </FormBs.Group>
 
               <FormBs.Group className='mb-3'>
-                <label htmlFor='price'> Precio </label>
-                <Field id='price' type='number' placeholder='Precio' name='price' className='form-control field-input' />
+                <label htmlFor='priceCost'> Precio de Costo </label>
+                <Field id='priceCost' type='number' placeholder='Precio de Costo' name='priceCost' className='form-control field-input' />
                 {
-                  errors.price && touched.price && (
-                    <ErrorMessage name='price' component='div' />
+                  errors.priceCost && touched.priceCost && (
+                    <ErrorMessage name='priceCost' component='div' />
                   )
                 }
               </FormBs.Group>
 
-              <Button type='submit' className='btn-btn-primary'>Cargar producto</Button>
+              <FormBs.Group className='mb-3'>
+                <label htmlFor='priceSale'> Precio de Venta </label>
+                <Field id='priceSale' type='number' placeholder='Precio de Venta' name='priceSale' className='form-control field-input' />
+                {
+                  errors.priceSale && touched.priceSale && (
+                    <ErrorMessage name='priceSale' component='div' />
+                  )
+                }
+              </FormBs.Group>
+
+              <FormBs.Group className='mb-3'>
+                <label htmlFor='unitPack'> Unidad x Caja </label>
+                <Field id='unitPack' type='number' placeholder='Unidad x Caja' name='unitPack' className='form-control field-input' />
+                {
+                  errors.unitPack && touched.unitPack && (
+                    <ErrorMessage name='unitPack' component='div' />
+                  )
+                }
+              </FormBs.Group>
+
+              <Button type='submit' className='btn-btn-info'>Cargar producto</Button>
               {
                 isSubmitting ? (<p>Enviando nuevo producto</p>) : null
               }
