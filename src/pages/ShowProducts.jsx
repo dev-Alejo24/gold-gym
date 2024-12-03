@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { axiosInstance } from '../services/axios.config';
 import Table from '../components/Table/Table';
 import SearchProduct from '../components/SearchProduct/SearchProduct';

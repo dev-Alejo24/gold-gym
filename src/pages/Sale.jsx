@@ -1,4 +1,3 @@
-import React from "react";
 import FormSale from "../components/FormSale/FormSale";
 
 function Sale() {

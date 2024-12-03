@@ -1,4 +1,3 @@
-import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Button from 'react-bootstrap/Button';
@@ -62,7 +61,7 @@ function FormCreateProduct() {
       >
 
         {
-          ({ values, isSubmitting, errors, touched }) => (
+          ({ isSubmitting, errors, touched }) => (
             <Form>
                <FormBs.Group className='mb-3'>
                 <label htmlFor='code'> Codigo del Producto </label>

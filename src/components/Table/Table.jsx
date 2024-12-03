@@ -1,6 +1,6 @@
-import React from 'react';
 import TableBs from 'react-bootstrap/Table';
 import ItemTable from '../ItemTable/ItemTable';
+import PropTypes from 'prop-types';
 //import './table.css';
 
 function Table({ items, editItem, deleteItem }) {
@@ -29,5 +29,11 @@ function Table({ items, editItem, deleteItem }) {
         </TableBs>
     )
 }
+
+Table.propTypes = {
+    items: PropTypes.array.isRequired,
+    editItem: PropTypes.func.isRequired,
+    deleteItem: PropTypes.func.isRequired
+};
 
 export default Table

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button, Form, InputGroup, Row, Col, Table } from 'react-bootstrap';
 
 function FormSale() {

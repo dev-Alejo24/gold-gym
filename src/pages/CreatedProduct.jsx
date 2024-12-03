@@ -1,4 +1,3 @@
-import React from 'react'
 import FormCreateProduct from '../components/Formulario/FormCreateProduct'
 
 const CratedProduct = () => {
